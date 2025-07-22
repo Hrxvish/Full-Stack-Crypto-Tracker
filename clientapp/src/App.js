@@ -11,6 +11,7 @@ function App() {
   const fetchCoins = async () => {
     try {
       const res = await axios.get('http://localhost:5000/api/coins');
+      console.log('Fetched coins:', res.data);
       setCoins(res.data);
     } catch (error) {
       console.error('Error fetching coins:', error);
@@ -96,18 +97,24 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {sortedCoins.map(coin => (
-              <tr key={coin.coinId}>
-                <td>{coin.name}</td>
-                <td>{coin.symbol.toUpperCase()}</td>
-                <td>${coin.price.toLocaleString()}</td>
-                <td>${coin.marketCap.toLocaleString()}</td>
-                <td className={coin.change24h >= 0 ? 'positive' : 'negative'}>
-                  {coin.change24h.toFixed(2)}%
-                </td>
-                <td>{new Date(coin.timestamp).toLocaleString()}</td>
+            {sortedCoins.length === 0 ? (
+              <tr>
+                <td colSpan="6">Loading...</td>
               </tr>
-            ))}
+            ) : (
+              sortedCoins.map(coin => (
+                <tr key={coin.coinId || coin._id}>
+                  <td>{coin.name}</td>
+                  <td>{coin.symbol.toUpperCase()}</td>
+                  <td>${coin.price.toLocaleString()}</td>
+                  <td>${coin.marketCap.toLocaleString()}</td>
+                  <td className={coin.change24h >= 0 ? 'positive' : 'negative'}>
+                    {coin.change24h.toFixed(2)}%
+                  </td>
+                  <td>{new Date(coin.timestamp).toLocaleString()}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
