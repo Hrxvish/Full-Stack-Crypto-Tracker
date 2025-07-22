@@ -36,5 +36,5 @@ A real-time cryptocurrency tracker built using the MERN stack (MongoDB, Express.
 ### 📥 Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/Full-Stack-Crypto-Tracker.git
-cd Full-Stack-Crypto-Tracker
+[git clone https://github.com/<your-username>/Full-Stack-Crypto-Tracker.git
+cd Full-Stack-Crypto-Tracker](https://github.com/Hrxvish/Full-Stack-Crypto-Tracker.git)
