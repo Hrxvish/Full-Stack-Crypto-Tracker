@@ -1,11 +1,16 @@
-const express = require('express');
+import express from 'express';
+import CurrentData from '../models/CurrentData.js';
+
 const router = express.Router();
-const { getCoins, postHistory } = require('../controllers/coinController');
 
-// GET /api/coins
-router.get('/coins', getCoins);
+router.get('/', async (req, res) => {
+  try {
+    const coins = await CurrentData.find().sort({ marketCap: -1 }).limit(10);
+    res.json(coins);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 
-// POST /api/history
-router.post('/history', postHistory);
-
-module.exports = router;
+export default router;
